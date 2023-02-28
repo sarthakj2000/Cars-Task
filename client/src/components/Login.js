@@ -12,7 +12,7 @@ const Login = () => {
       onCompleted(data){
         console.log("data.user.token",data.user.token)
         localStorage.setItem("token",data.user.token)
-        navigate('/')
+        navigate('/home')
     }
     })
     if(loading){
