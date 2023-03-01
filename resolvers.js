@@ -38,7 +38,7 @@ const resolvers={
         carsById:async(_,{carId})=> await Car.findById({_id:carId}),
 
         carsExceptThatUser:async(_,args,{userId})=> {
-            console.log("userId",userId)
+         
             if(!userId){
                 throw new Error("You must be logged in")
             }
@@ -49,7 +49,6 @@ const resolvers={
             }
             cars= await Car.find({}).populate("by","_id firstName")
             cars=cars.filter((car)=>car.by._id!=userId)
-            // console.log("cars",cars,mongoose.Types.ObjectId(userId))
             return cars
         }
     },

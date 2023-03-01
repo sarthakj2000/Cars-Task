@@ -2,11 +2,14 @@ import { useQuery } from '@apollo/client'
 import React, { useState } from 'react'
 import EditModal from "./EditModal"
 import { GET_ALL_CARS, GET_HOME_PAGE, GET_MY_CARS } from '../gqloperations/queries'
+import Paginations from './Paginations'
 
 const MyCars = () => {
    const {loading,error,data} =useQuery(GET_MY_CARS)
    const [modal,setModal]=useState(false)
    const [editObj,setEditObj]=useState({})
+   const [currentPage,setCurrentPage]=useState(1);
+   const [postsPerPage,setPostsPerPage]=useState(5);
    const toggle1 = () => setModal(!modal);
    if(loading) return <h1>loading</h1>
    if(error){
@@ -19,6 +22,10 @@ const MyCars = () => {
     setEditObj(obj)
     toggle1()
    }
+   const lastPostIndex=currentPage*postsPerPage
+   const firstPostIndex=lastPostIndex-postsPerPage;
+   const cars=data.userSignedIn.cars.slice(firstPostIndex,lastPostIndex)
+
   return (
     <div className='container'>
       {modal ?<EditModal
@@ -26,6 +33,7 @@ const MyCars = () => {
                     isOpen={modal}
                     editObj={editObj}
                   />:
+             <>
                   <table className='striped'>
         <thead>
           <tr>
@@ -35,8 +43,7 @@ const MyCars = () => {
         </thead>
 
         <tbody>
-          {console.log("data.userSignedIn",data.userSignedIn)}
-          {data.userSignedIn.cars.map((item)=>{
+          {cars.map((item)=>{
             return <tr>
             <td>{item.name}</td>
             <td>{item.color}</td>
@@ -46,9 +53,11 @@ const MyCars = () => {
           
         </tbody>
       </table>
+      <Paginations currentPage={currentPage} setCurrentPage={setCurrentPage} totalPosts={data.userSignedIn.cars.length} postsPerPage={postsPerPage} />
+             </>
                   }
         
-      
+        
     </div>
   )
 }

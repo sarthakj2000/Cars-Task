@@ -10,7 +10,6 @@ const Login = () => {
 
     const [signinUser,{error,loading,data}] =useMutation(LOGIN_USER,{
       onCompleted(data){
-        console.log("data.user.token",data.user.token)
         localStorage.setItem("token",data.user.token)
         navigate('/home')
     }
