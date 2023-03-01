@@ -101,7 +101,7 @@ const resolvers={
          },
 
          //update user
-         updateCar:async(_,{name,carId},{userId})=>{
+         updateCar:async(_,{name,color,carId},{userId})=>{
             
             if(!userId){
                 throw new Error("You must be logged in")
@@ -112,6 +112,7 @@ const resolvers={
             }
             let carFeilds={};
             if(name) carFeilds.name=name
+            if(color) carFeilds.color=color
 
             await Car.findByIdAndUpdate(
                 {_id:carId},

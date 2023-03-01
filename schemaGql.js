@@ -29,6 +29,7 @@ type IdName{
 }
 
 type Car{
+    _id:ID
     name:String,
     color:String
     by:ID
@@ -40,7 +41,7 @@ type Mutation{
     signupUser(userNew:UserInput!):User
     signinUser(userSignin:UserSigninInput!):Token
     createCar(name:String!,color:String):String
-    updateCar(name:String!,carId:ID!):String
+    updateCar(name:String!,color:String,carId:String!):String
     deleteCar(carId:ID!):String
 }
 input UserInput{

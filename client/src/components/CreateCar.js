@@ -1,7 +1,6 @@
 import { useMutation } from '@apollo/client';
 import React,{useState} from 'react'
 import { CREATE_CAR } from '../gqloperations/mutations';
-import { GET_ALL_CARS, GET_HOME_PAGE, GET_MY_CARS } from '../gqloperations/queries';
 
 const CreateCar = () => {
   const [name,setName]=useState("");

@@ -24,8 +24,10 @@ query homePage{
 export const GET_MY_CARS=gql`
 query getMyCars{
     userSignedIn{
+        _id
         firstName
         cars{
+            _id
             name
             color
         }

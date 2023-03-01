@@ -18,3 +18,9 @@ mutation createCar($name:String!,$color:String){
     createCar(name:$name,color:$color)
   }
 `
+
+export const EDIT_CAR=gql`
+mutation updateCar($name:String!,$color:String,$carId:String!){
+  updateCar(name:$name,color:$color,carId:$carId)
+}
+`
